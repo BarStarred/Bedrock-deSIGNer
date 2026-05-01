@@ -83,13 +83,163 @@
             box-shadow: inset 2px 2px 0px var(--mc-ui-border-light), inset -2px -2px 0px var(--mc-ui-border-dark);
             border-bottom-color: var(--mc-ui-bg);
         }
+        
+        /* RICH TEXT HOTBAR */
+        .rich-toolbar {
+            display: flex;
+            flex-wrap: wrap; /* Allows wrapping on very narrow screens */
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--mc-slot-bg);
+            border: 2px solid var(--mc-ui-black);
+            box-shadow: inset 3px 3px 0px #373737, inset -3px -3px 0px var(--mc-ui-border-light);
+            padding: 8px 10px;
+            margin-bottom: 10px;
+            gap: 10px;
+        }
+        
+        /* 3-Pane Layout Styling */
+        .tool-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            max-width: 180px; /* Forces a neat 4x2 icon grid */
+        }
+        
+        .action-group {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 6px;
+            flex: 1; /* Automatically stretches to fill the empty middle space! */
+            margin: 0 8px;
+        }
+        
+        .action-group .action-btn {
+            width: 100%; /* Forces both buttons to be the exact same width */
+            padding: 8px 4px; /* Tighter padding for the stacked layout */
+            font-size: 16px;
+            text-align: center;
+        }
+        
+        .tool-btn {
+            background-color: var(--mc-ui-bg);
+            border: 2px solid var(--mc-ui-black);
+            box-shadow: inset 2px 2px 0px var(--mc-ui-border-light), inset -2px -2px 0px var(--mc-ui-border-dark);
+            font-family: 'MinecraftSeven', sans-serif;
+            font-size: 20px;
+            color: #000;
+            width: 40px; 
+            height: 40px; 
+            cursor: pointer;
+            display: flex; justify-content: center; align-items: center;
+        }
+        
+        .tool-btn:active {
+            box-shadow: inset 2px 2px 0px var(--mc-ui-border-dark), inset -2px -2px 0px var(--mc-ui-border-light);
+            padding: 2px 0 0 2px;
+        }
 
-        /* EDITOR AREAS */
+        /* Styling for the new 40x40 Icon Copy Button */
+        .tool-btn.primary { 
+            background-color: #3c8527; 
+            color: #fff;
+            text-shadow: 2px 2px 0px #1e4513;
+            box-shadow: inset 2px 2px 0px #5ea345, inset -2px -2px 0px #1e4513;
+        }
+        
+        .tool-btn.primary:active {
+            box-shadow: inset 2px 2px 0px #1e4513, inset -2px -2px 0px #5ea345;
+            padding: 2px 0 0 2px;
+        }
+
+        /* ENLARGED D-PAD JOYSTICK */
+        .joystick-group {
+            display: grid;
+            grid-template-columns: 36px 36px 36px; /* Massive hitboxes for thumbs */
+            grid-template-rows: 36px 36px;
+            gap: 4px;
+        }
+        
+        .joy-btn {
+            background-color: #444;
+            color: #ccc;
+            border: 2px solid var(--mc-ui-black);
+            box-shadow: inset 2px 2px 0px #666, inset -2px -2px 0px #222;
+            font-size: 14px; /* Larger icons */
+            cursor: pointer;
+            display: flex; justify-content: center; align-items: center;
+            padding: 0;
+        }
+        
+        .joy-btn:active {
+            box-shadow: inset 2px 2px 0px #222, inset -2px -2px 0px #666;
+            color: #fff;
+        }
+        
+        /* Forces the buttons into a perfect cross shape */
+        .joy-btn.up { grid-column: 2; grid-row: 1; }
+        .joy-btn.left { grid-column: 1; grid-row: 2; }
+        .joy-btn.down { grid-column: 2; grid-row: 2; }
+        .joy-btn.right { grid-column: 3; grid-row: 2; }
+
+        
+        /* THE EDITOR CONTAINER - Authentic 2:1 Aspect Ratio */
         .editor-container {
             position: relative;
-            height: 140px;
-            margin-bottom: 10px;
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 2 / 1; /* Locks it to a Minecraft sign shape */
+            margin: 0 auto 10px auto;
+            container-type: inline-size; /* Enables modern dynamic text scaling */
         }
+
+        /* THE VISUAL EDITOR - Scaled and Textured */
+        #visualEditor {
+            background-color: var(--wood-bg, #b8945f);
+            border: 4px solid var(--mc-ui-black);
+            box-shadow: inset 4px 4px 0px var(--wood-highlight, #d1b27b), inset -4px -4px 0px var(--wood-border, #8f6b38);
+            color: #000;
+            
+            /* Authentically splits the board into exactly 4 planks */
+            background-image: repeating-linear-gradient(
+                to bottom,
+                transparent,
+                transparent 25%,
+                rgba(0, 0, 0, 0.08) 25%,
+                rgba(0, 0, 0, 0.08) 50%
+            );
+            background-size: 100% 50%;
+            
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            text-align: center;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.3);
+            
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            
+            /* DYNAMIC SCALING */
+            padding: 4cqw 2cqw; /* Padding scales with the box size */
+            font-size: 8.5cqw; /* Text mathematically scales to fit ~15 chars across */
+            line-height: 1.15; /* Tightened to ensure 4 lines fit perfectly */
+            overflow: hidden; /* Prevents text from bleeding out visually */
+            transition: border-color 0.1s ease; /* For the error flash */
+        }
+        
+        textarea#rawEditor { 
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            resize: none; 
+            background-color: #000;
+        }
+
 
         .editor-box {
             width: 100%;
@@ -111,15 +261,36 @@
         
         .editor-box.active { display: block; }
 
-        /* The WYSIWYG Content Editable Area */
-        #visualEditor {
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            line-height: 1.2;
-            text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
+        /* MINECRAFT DROP-DOWN MENU */
+        .mc-select {
+            background-color: var(--mc-ui-bg);
+            color: #000;
+            font-family: 'MinecraftSeven', sans-serif;
+            font-size: 16px;
+            border: 2px solid var(--mc-ui-black);
+            box-shadow: inset 2px 2px 0px var(--mc-ui-border-light), inset -2px -2px 0px var(--mc-ui-border-dark);
+            padding: 6px 10px;
+            margin-left: 10px;
+            cursor: pointer;
+            outline: none;
         }
 
-        textarea#rawEditor { resize: none; }
+        /* WOOD TYPE COLOR PALETTES */
+        #visualEditor[data-wood="oak"]      { --wood-bg: #b8945f; --wood-border: #8f6b38; --wood-highlight: #d1b27b; }
+        #visualEditor[data-wood="spruce"]   { --wood-bg: #745a36; --wood-border: #543f22; --wood-highlight: #8a6d43; }
+        #visualEditor[data-wood="birch"]    { --wood-bg: #d7c185; --wood-border: #bda15b; --wood-highlight: #e5d4a1; }
+        #visualEditor[data-wood="jungle"]   { --wood-bg: #a07353; --wood-border: #7d5438; --wood-highlight: #b98b67; }
+        #visualEditor[data-wood="acacia"]   { --wood-bg: #a85a32; --wood-border: #824121; --wood-highlight: #c56f40; }
+        #visualEditor[data-wood="dark_oak"] { --wood-bg: #422b15; --wood-border: #2c1b0a; --wood-highlight: #563b20; }
+        #visualEditor[data-wood="pale_oak"] { --wood-bg: #c9c9c4; --wood-border: #8f8f8a; --wood-highlight: #dbdbd6; }
+
+        #visualEditor[data-wood="mangrove"] { --wood-bg: #753631; --wood-border: #54221f; --wood-highlight: #8e433d; }
+        #visualEditor[data-wood="cherry"]   { --wood-bg: #e4b5b7; --wood-border: #cc999a; --wood-highlight: #f1c8c9; }
+        #visualEditor[data-wood="bamboo"]   { --wood-bg: #c6aa64; --wood-border: #a3884b; --wood-highlight: #dcc27a; }
+        #visualEditor[data-wood="crimson"]  { --wood-bg: #793a4a; --wood-border: #572532; --wood-highlight: #944a5d; }
+        #visualEditor[data-wood="warped"]   { --wood-bg: #3a8e8c; --wood-border: #266b69; --wood-highlight: #49a6a4; }
+
+
 
         .controls {
             display: flex;
@@ -230,29 +401,127 @@
         @media (max-width: 768px) {
             .mc-window { height: 100vh; border: none; }
         }
+        
+                /* CUSTOM MODAL UI */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none; /* Hidden until triggered */
+            justify-content: center; align-items: center;
+            z-index: 100;
+        }
+        .modal-overlay.active { display: flex; }
+        
+        .modal-content {
+            width: 90%; max-width: 400px; height: auto; max-height: 80vh;
+            padding: 15px; border-width: 4px; /* Matches the mc-window */
+        }
+        .modal-content h2 { margin-top: 0; font-size: 20px; color: #3f3f3f; text-shadow: 2px 2px 0px var(--mc-ui-border-light); }
+        
+        .modal-inputs {
+            display: flex; flex-direction: column; gap: 10px;
+            margin-bottom: 15px; max-height: 50vh; overflow-y: auto;
+        }
+        .modal-input-group { display: flex; flex-direction: column; }
+        .modal-input-group label { color: #333; margin-bottom: 4px; font-size: 16px; font-weight: bold; }
+        .modal-input-group input {
+            background-color: #000; color: #fff;
+            font-family: 'MinecraftSeven', monospace; font-size: 18px;
+            border: 2px solid var(--mc-ui-black); box-shadow: inset 4px 4px 0px #333;
+            padding: 8px; outline: none;
+        }
+        
+                /* GLITCH TEXT EFFECT FOR VISUAL EDITOR */
+        .mc-glitch {
+            background-color: rgba(0, 0, 0, 0.4);
+            color: transparent;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+            border-radius: 2px;
+            user-select: all;
+        }
+        
+        /* CUSTOM MOBILE TOOLTIP */
+        .mc-tooltip {
+            position: fixed;
+            background-color: var(--mc-ui-black);
+            color: #fff;
+            font-family: 'MinecraftSeven', sans-serif;
+            font-size: 14px;
+            padding: 6px 10px;
+            border: 2px solid var(--mc-ui-border-light);
+            box-shadow: inset -2px -2px 0px var(--mc-ui-border-dark);
+            pointer-events: none;
+            /* Prevents the tooltip from blocking taps */
+            z-index: 1000;
+            display: none;
+        }
+
     </style>
 </head>
 <body>
-
+    <div id="mcTooltip" class="mc-tooltip"></div>
     <div class="mc-window">
         <div class="header-section">
             <h1>Sign Crafter</h1>
             
-            <div class="tabs">
-                <button class="tab-btn active" onclick="switchTab('visual')" id="btnVisual">Visual Editor</button>
-                <button class="tab-btn" onclick="switchTab('raw')" id="btnRaw">Raw Code</button>
+            <div class="tabs" style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; gap: 4px; flex-grow: 1;">
+                    <button class="tab-btn active" onclick="switchTab('visual')" id="btnVisual">Visual Editor</button>
+                    <button class="tab-btn" onclick="switchTab('raw')" id="btnRaw">Raw Code</button>
+                </div>
+                
+                <select id="woodType" class="mc-select" onchange="changeWoodType()">
+                    <option value="oak">Oak</option>
+                    <option value="spruce">Spruce</option>
+                    <option value="birch">Birch</option>
+                    <option value="jungle">Jungle</option>
+                    <option value="acacia">Acacia</option>
+                    <option value="dark_oak">Dark Oak</option>
+                    <option value="pale_oak">Pale Oak</option>
+                    <option value="mangrove">Mangrove</option>
+                    <option value="cherry">Cherry</option>
+                    <option value="bamboo">Bamboo</option>
+                    <option value="crimson">Crimson</option>
+                    <option value="warped">Warped</option>
+                </select>
             </div>
-
+            
+            
             <div class="editor-container">
                 <div id="visualEditor" class="editor-box active" contenteditable="true" spellcheck="false" placeholder="Type here..."></div>
                 
                 <textarea id="rawEditor" class="editor-box" spellcheck="false" placeholder="Type raw data..."></textarea>
             </div>
 
-            <div class="controls">
-                <button class="action-btn primary" onclick="compileAndCopy()">Copy For Game</button>
-                <button class="action-btn" onclick="clearSign()">Clear</button>
+            <div class="rich-toolbar">
+                
+                <div class="tool-group">
+                    <button class="tool-btn" onmousedown="preventFocus(event)" onclick="undoSession()" data-tip="Undo">&lt;-</button>
+                    <button class="tool-btn" onmousedown="preventFocus(event)" onclick="redoSession()" data-tip="Redo">-&gt;</button>
+                    <button class="tool-btn" onmousedown="preventFocus(event)" onclick="applyFormat('bold')" data-tip="Bold">B</button>
+<button class="tool-btn" onmousedown="preventFocus(event)" onclick="applyFormat('italic')" data-tip="Italic"><i>I</i></button>
+
+                    <button class="tool-btn" onmousedown="preventFocus(event)" onclick="applyFormat('glitch')" data-tip="Glitch Text">#</button>
+                    <button class="tool-btn" onmousedown="preventFocus(event)" onclick="applyFormat('reset')" data-tip="Reset Formatting">R</button>
+                    <button class="tool-btn" onmousedown="preventFocus(event)" onclick="insertSymbol('¦')" data-tip="Thin Font">|</button>
+                    <button class="tool-btn" onmousedown="preventFocus(event)" onclick="insertSymbol('\n')" data-tip="Line Break">_</button>
+                </div>
+
+                
+                <div class="action-group">
+                    <button class="action-btn primary" onclick="compileAndCopy()">Copy</button>
+                    <button class="action-btn" onclick="clearSign()">Clear</button>
+                </div>
+
+                <div class="joystick-group">
+                    <button class="joy-btn up" onmousedown="preventFocus(event)" onclick="moveCaret('backward', 'line')">▲</button>
+                    <button class="joy-btn left" onmousedown="preventFocus(event)" onclick="moveCaret('backward', 'character')">◄</button>
+                    <button class="joy-btn right" onmousedown="preventFocus(event)" onclick="moveCaret('forward', 'character')">►</button>
+                    <button class="joy-btn down" onmousedown="preventFocus(event)" onclick="moveCaret('forward', 'line')">▼</button>
+                </div>
+                
             </div>
+
         </div>
 
         <div class="scroll-section">
@@ -260,7 +529,20 @@
                 </div>
         </div>
     </div>
+    
+        <div id="customPromptModal" class="modal-overlay">
+        <div class="modal-content mc-window">
+            <h2 id="modalTitle">Configure Template</h2>
+            <div id="modalInputs" class="modal-inputs">
+                </div>
+            <div class="controls">
+                <button class="action-btn primary" id="modalConfirmBtn">Insert</button>
+                <button class="action-btn" id="modalCancelBtn">Cancel</button>
+            </div>
+        </div>
+    </div>
 
+    
     <script src="script.js"></script>
 </body>
 </html>
