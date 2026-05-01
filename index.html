@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bedrock Sign Crafter</title>
+    
+    <style>
+        @font-face {
+            font-family: 'MinecraftSeven';
+            src: url('./res/seven.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'NotoSansFallback';
+            src: url('./res/Noto Sans-Thin.ttf') format('truetype');
+        }
+
+        :root {
+            --mc-ui-bg: #c6c6c6;
+            --mc-ui-border-light: #ffffff;
+            --mc-ui-border-dark: #555555;
+            --mc-ui-black: #000000;
+            --mc-slot-bg: #8b8b8b;
+            --wood-base: #8b5a2b;
+            --wood-border-dark: #5c3a18;
+            --wood-border-light: #ab7542;
+        }
+        
+        body {
+            font-family: 'MinecraftSeven', sans-serif;
+            background-color: #1d1d1d; 
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            -webkit-font-smoothing: none;
+            font-smooth: never; 
+        }
+
+        .mc-window {
+            background-color: var(--mc-ui-bg);
+            border: 4px solid var(--mc-ui-black);
+            box-shadow: inset 4px 4px 0px var(--mc-ui-border-light), inset -4px -4px 0px var(--mc-ui-border-dark);
+            width: 100%;
+            max-width: 950px;
+            height: 95vh;
+            display: flex;
+            flex-direction: column;
+            padding: 4px;
+            box-sizing: border-box;
+        }
+
+        .header-section { padding: 10px; }
+        h1 {
+            color: #3f3f3f;
+            text-align: left;
+            margin: 5px 0 10px 5px;
+            font-size: 24px;
+            text-shadow: 2px 2px 0px var(--mc-ui-border-light);
+        }
+
+        /* TABS UI */
+        .tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 4px;
+        }
+        .tab-btn {
+            background-color: var(--mc-slot-bg);
+            color: #333;
+            border: 2px solid var(--mc-ui-black);
+            box-shadow: inset 2px 2px 0px var(--mc-ui-border-dark), inset -2px -2px 0px var(--mc-ui-border-light);
+            padding: 8px 16px;
+            font-family: 'MinecraftSeven', sans-serif;
+            font-size: 16px;
+            cursor: pointer;
+            flex: 1;
+        }
+        .tab-btn.active {
+            background-color: var(--mc-ui-bg);
+            color: #000;
+            box-shadow: inset 2px 2px 0px var(--mc-ui-border-light), inset -2px -2px 0px var(--mc-ui-border-dark);
+            border-bottom-color: var(--mc-ui-bg);
+        }
+
+        /* EDITOR AREAS */
+        .editor-container {
+            position: relative;
+            height: 140px;
+            margin-bottom: 10px;
+        }
+
+        .editor-box {
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            color: #fff;
+            font-family: 'MinecraftSeven', monospace;
+            font-size: 20px;
+            border: 2px solid var(--mc-ui-black);
+            box-shadow: inset 4px 4px 0px #333;
+            padding: 10px;
+            box-sizing: border-box;
+            outline: none;
+            overflow-y: auto;
+            position: absolute;
+            top: 0; left: 0;
+            display: none; /* Hidden by default */
+        }
+        
+        .editor-box.active { display: block; }
+
+        /* The WYSIWYG Content Editable Area */
+        #visualEditor {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            line-height: 1.2;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
+        }
+
+        textarea#rawEditor { resize: none; }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 5px;
+        }
+
+        button.action-btn {
+            background-color: var(--mc-ui-bg);
+            color: #000;
+            font-family: 'MinecraftSeven', sans-serif;
+            font-size: 18px;
+            border: 2px solid var(--mc-ui-black);
+            box-shadow: inset 3px 3px 0px var(--mc-ui-border-light), inset -3px -3px 0px var(--mc-ui-border-dark);
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+        button.action-btn:active {
+            box-shadow: inset 3px 3px 0px var(--mc-ui-border-dark), inset -3px -3px 0px var(--mc-ui-border-light);
+            padding: 10px 14px 6px 18px; 
+        }
+        button.action-btn.primary { 
+            background-color: #3c8527; 
+            color: #fff;
+            text-shadow: 2px 2px 0px #1e4513;
+            box-shadow: inset 3px 3px 0px #5ea345, inset -3px -3px 0px #1e4513;
+        }
+        button.action-btn.primary:active {
+            box-shadow: inset 3px 3px 0px #1e4513, inset -3px -3px 0px #5ea345;
+        }
+
+        .scroll-section {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 10px;
+            background-color: var(--mc-ui-bg);
+            border: 2px solid var(--mc-ui-black);
+            box-shadow: inset 3px 3px 0px var(--mc-ui-border-dark), inset -3px -3px 0px var(--mc-ui-border-light);
+            margin: 0 10px 10px 10px;
+        }
+        .palette-container { max-width: 900px; margin: 0 auto; }
+
+        .accordion-btn {
+            background-color: var(--mc-ui-bg);
+            color: #333;
+            font-family: 'MinecraftSeven', sans-serif;
+            cursor: pointer;
+            padding: 12px;
+            width: 100%;
+            text-align: left;
+            border: 2px solid var(--mc-ui-black);
+            box-shadow: inset 2px 2px 0px var(--mc-ui-border-light), inset -2px -2px 0px var(--mc-ui-border-dark);
+            outline: none;
+            font-size: 20px;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .accordion-btn:active { box-shadow: inset 2px 2px 0px var(--mc-ui-border-dark), inset -2px -2px 0px var(--mc-ui-border-light); }
+        .accordion-btn::after { content: '+'; color: #333; font-size: 24px; line-height: 20px; }
+        .accordion-btn.active::after { content: '-'; }
+
+        .accordion-content {
+            padding: 0 10px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            margin-bottom: 15px;
+            background-color: var(--mc-slot-bg);
+            border: 2px solid var(--mc-ui-black);
+            box-shadow: inset 3px 3px 0px #373737, inset -3px -3px 0px var(--mc-ui-border-light);
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+            gap: 4px;
+            padding: 10px;
+        }
+
+        .char-btn {
+            background-color: var(--mc-ui-bg);
+            color: #000;
+            padding: 8px 4px;
+            border: 2px solid var(--mc-ui-black);
+            box-shadow: inset 2px 2px 0px var(--mc-ui-border-light), inset -2px -2px 0px var(--mc-ui-border-dark);
+            text-align: center;
+            font-family: 'MinecraftSeven', sans-serif;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .char-btn:active {
+            box-shadow: inset 2px 2px 0px var(--mc-ui-border-dark), inset -2px -2px 0px var(--mc-ui-border-light);
+            padding: 10px 2px 6px 6px;
+        }
+        .char-btn small { display: block; font-size: 14px; margin-top: 4px; color: #333; }
+        .color-swatch {
+            display: inline-block; width: 14px; height: 14px; border: 2px solid var(--mc-ui-black); margin-bottom: 4px;
+        }
+        .char-btn.full-width {
+            grid-column: 1 / -1; flex-direction: row; justify-content: space-between; padding: 12px 15px; text-align: left; font-size: 18px;
+        }
+
+        @media (max-width: 768px) {
+            .mc-window { height: 100vh; border: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mc-window">
+        <div class="header-section">
+            <h1>Sign Crafter</h1>
+            
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('visual')" id="btnVisual">Visual Editor</button>
+                <button class="tab-btn" onclick="switchTab('raw')" id="btnRaw">Raw Code</button>
+            </div>
+
+            <div class="editor-container">
+                <div id="visualEditor" class="editor-box active" contenteditable="true" spellcheck="false" placeholder="Type here..."></div>
+                
+                <textarea id="rawEditor" class="editor-box" spellcheck="false" placeholder="Type raw data..."></textarea>
+            </div>
+
+            <div class="controls">
+                <button class="action-btn primary" onclick="compileAndCopy()">Copy For Game</button>
+                <button class="action-btn" onclick="clearSign()">Clear</button>
+            </div>
+        </div>
+
+        <div class="scroll-section">
+            <div class="palette-container" id="palette">
+                </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
