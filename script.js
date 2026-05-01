@@ -264,3 +264,33 @@ function clearSign() {
     visualEditor.innerHTML = '';
     rawEditor.value = '';
 }
+
+// --- LOCAL STORAGE AUTO-SAVE ---
+function saveSession() {
+    // Grab the current text depending on which tab is active
+    const data = currentMode === 'visual' ? parseHTMLToRaw(visualEditor) : rawEditor.value;
+    localStorage.setItem('bedrockSignData', data);
+}
+
+function loadSession() {
+    const savedData = localStorage.getItem('bedrockSignData');
+    if (savedData) {
+        rawEditor.value = savedData;
+        visualEditor.innerHTML = parseRawToHTML(savedData);
+    }
+}
+
+// Trigger the save function whenever you stop typing for 500ms
+let timeoutId;
+visualEditor.addEventListener('input', () => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(saveSession, 500);
+});
+
+rawEditor.addEventListener('input', () => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(saveSession, 500);
+});
+
+// Load any existing saved data when the app first boots up
+window.addEventListener('DOMContentLoaded', loadSession);
