@@ -17,6 +17,21 @@ const charDictionary = {
         { char: "§s", label: "Diamond", colorHex: "#2CBAA8" }, { char: "§t", label: "Lapis", colorHex: "#21497B" },
         { char: "§u", label: "Amethyst", colorHex: "#9A5CC6" }
     ],
+    "Sign Tutorials": [
+        {
+            char: `Use the section sign and .`,
+            label: "Formatting guide",
+            fullWidth: true
+        },
+        {
+            char: `§00 §11 §22 §33 §44 §55 §66 §77 §88 §99 
+§aa §bb §cc §dd §ee §ff §gg §hh §ii §jj §mm §nn
+§pp §qq §ss §gt §uu §vv §ww §xx §yy §zz
+§kk §k GLITCH §ll §lBold §oo §oItalic`,
+            label: "Formatting Characters",
+            fullWidth: true
+        }
+    ],
     "Lever & Switch States": [
     {
         char: "§8[ §a███ §8]\n§0§l{System}\n§8[ §c▒▒▒ §8]",
@@ -379,7 +394,95 @@ const charDictionary = {
             char: "§c  █\n§c▼ █ ▼\n§c  ▼", 
             label: "Giant Down Arrow", 
             fullWidth: true 
+        },
+                { 
+            char: "§e◄──┴──►\n§e│\n§e│\n§e▲", 
+            label: "Path: Fork", 
+            fullWidth: true 
+        },
+        { 
+            char: "§a┌──►\n§a│\n§a│\n§a▲", 
+            label: "Path: Branch Right", 
+            fullWidth: true 
+        },
+        { 
+            char: "§c◄──┐\n§c│\n§c│\n§c▲", 
+            label: "Path: Branch Left", 
+            fullWidth: true 
+        },
+        { 
+            char: "§b◄██████►\n§b██\n§b██\n§b██", 
+            label: "T-Junction Marker", 
+            fullWidth: true 
+        },
+        { 
+            char: "§6▼ ┌─┐\n§6│ │ │\n§6└─┘ ▲", 
+            label: "U-Turn (Down)", 
+            fullWidth: true 
+        },
+        { 
+            char: "§8╔═════╗\n§8║ §c▼ §8║\n§8║ §c▼ §8║\n§8╚═════╝", 
+            label: "Drop Shaft (Down)", 
+            fullWidth: true 
+        },
+        { 
+            char: "§8╔═════╗\n§8║ §a▲ §8║\n§8║ §a▲ §8║\n§8╚═════╝", 
+            label: "Launch Shaft (Up)", 
+            fullWidth: true 
+        },
+        { 
+            char: "§7▬▬ι════►\n§0\n§0{Target}", 
+            label: "Sword Pointer", 
+            fullWidth: true,
+            prompts: ["Target"]
+        },
+        { 
+            char: "§c  N  \n§8W §e❖ §8E\n§8  S  ", 
+            label: "Compass Rose", 
+            fullWidth: true 
+        },
+        { 
+            char: "§4▲\n§4◄ §cO §4►\n§4▼\n§0{Target}", 
+            label: "Target Crosshairs", 
+            fullWidth: true,
+            prompts: ["Target"]
+        },
+        { 
+            char: "§a▲\n§2▲\n§a▲\n§2▲", 
+            label: "Speed Boost (Up)", 
+            fullWidth: true 
+        },
+        { 
+            char: "§4▼\n§c▼\n§4▼\n§c▼", 
+            label: "Speed Boost (Down)", 
+            fullWidth: true 
+        },
+        { 
+            char: "§7. . . ┐\n§7.\n§7.\n§a▼", 
+            label: "Dotted Trail (Right)", 
+            fullWidth: true 
+        },
+        { 
+            char: "§7┌ . . .\n§7.\n§7.\n§c▼", 
+            label: "Dotted Trail (Left)", 
+            fullWidth: true 
+        },
+        { 
+            char: "§b◄   ►\n§b┌─┴─┐\n§b│   │\n§b▲   ▲", 
+            label: "Split / Spread", 
+            fullWidth: true 
+        },
+        { 
+            char: "§8[§a██████►§8]", 
+            label: "Heavy Progress Arrow", 
+            fullWidth: true 
+        },
+        { 
+            char: "§d◄══════►", 
+            label: "Double Ended Line", 
+            fullWidth: true 
         }
+
     ],
     "Color & Format Guides": [
         {
@@ -388,21 +491,37 @@ const charDictionary = {
             fullWidth: true
         },
         {
-            char: "§0§lWARM COLORS\n§c c = Red   §6 6 = Gold\n§e e = Yel   §a a = L.Grn\n§2 2 = D.Grn",
+            char: "§0§lWARM COLORS\n§4 4=D.Red  §c c=Red\n§6 6=Gold   §e e=Yel\n§2 2=D.Grn  §a a=L.Grn",
             label: "Cheat Sheet: Warm",
             fullWidth: true
         },
         {
-            char: "§0§lCOOL COLORS\n§b b = Aqu   §3 3 = Cya\n§9 9 = Blu   §1 1 = D.Bl\n§d d = Pnk   §5 5 = Prp",
+            char: "§0§lCOOL COLORS\n§b b=Aqu    §3 3=Cya\n§9 9=Blu    §1 1=D.Blu\n§d d=Pnk    §5 5=Prp",
             label: "Cheat Sheet: Cool",
             fullWidth: true
         },
         {
-            char: "§0§lGREYS & STYLES\n§f f = Wht   §7 7 = Gry\n§8 8 = D.Gy  §0 0 = Blk\n§l l = Bld   §r§o o = Itl",
+            char: "§0§lGREYS & STYLES\n§f f=Wht    §7 7=Gry\n§8 8=D.Gry  §0 0=Blk\n§l l=Bld    §o o=Itl",
             label: "Cheat Sheet: Greys/Style",
+            fullWidth: true
+        },
+        {
+            char: "§0§lMATERIAL ORES\n§m m=R.Stn  §n n=Copr\n§p p=M.Gld  §q q=Emrld\n§s s=Diamd  §t t=Lapis",
+            label: "Cheat Sheet: Ores",
+            fullWidth: true
+        },
+        {
+            char: "§0§lMATERIAL BASES\n§h h=Qrtz   §i i=Iron\n§j j=N.Rite §u u=Amyst\n§g g=Coin   §k k=Glch",
+            label: "Cheat Sheet: Bases",
+            fullWidth: true
+        },
+        {
+            char: "§0§lADVANCED\n§8┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n§k k §r= §kGlitch\n§r r = Reset Format",
+            label: "Cheat Sheet: Advanced",
             fullWidth: true
         }
     ],
+
 
 };
 
@@ -606,12 +725,13 @@ function parseRawToHTML(rawText) {
     let html = "";
     const lines = rawText.split('\n');
     
+    // THE BEDROCK FIX: State variables are moved OUTSIDE the loop!
+    // This perfectly mimics Bedrock's continuous string parsing across line breaks.
+    let currentColor = '#000000';
+    let isBold = false;
+    let isItalic = false;
+    
     lines.forEach((line, index) => {
-        // CHANGED: Default text is now black to match un-dyed oak signs
-        let currentColor = '#000000';
-        let isBold = false;
-        let isItalic = false;
-        
         let lineHtml = "";
         let currentSpan = "";
         
@@ -634,12 +754,13 @@ function parseRawToHTML(rawText) {
                 
                 if (codeToHex[fullCode]) {
                     currentColor = codeToHex[fullCode];
+                    // BEDROCK RULE: Applying a new color instantly wipes previous styles!
                     isBold = false;
                     isItalic = false;
                 } else if (code === 'l') { isBold = true; }
                 else if (code === 'o') { isItalic = true; }
                 else if (code === 'r') {
-                    currentColor = '#ffffff';
+                    currentColor = '#000000'; // Resets to un-dyed oak default
                     isBold = false;
                     isItalic = false;
                 }
@@ -649,13 +770,22 @@ function parseRawToHTML(rawText) {
             }
         }
         flushSpan();
+        
+        // Wrap the compiled line in a div (unless it's the first line)
         html += (index > 0 ? "<div>" : "") + (lineHtml || "<br>") + (index > 0 ? "</div>" : "");
     });
+    
     return html;
 }
 
+
+
+
 // --- MENU GENERATOR LOGIC ---
 for (const [category, characters] of Object.entries(charDictionary)) {
+    // NEW: Skip colors so they only appear in the dedicated UI!
+    if (category === "Standard Colors" || category === "Material Colors") continue;
+    
     const accBtn = document.createElement('button');
     accBtn.className = 'accordion-btn';
     accBtn.innerText = category;
@@ -941,7 +1071,7 @@ document.querySelectorAll('[data-tip]').forEach(btn => {
             tooltipEl.style.display = 'block';
             // Position it above the finger
             tooltipEl.style.left = Math.max(10, e.touches[0].clientX - 40) + 'px';
-            tooltipEl.style.top = (e.touches[0].clientY - 50) + 'px';
+            tooltipEl.style.top = (e.touches[0].clientY - 90) + 'px';
         }, 400);
     });
     
@@ -958,3 +1088,157 @@ document.querySelectorAll('[data-tip]').forEach(btn => {
     // Crucial: Stop mobile browsers from popping up the "Right Click / Copy Image" menu on long press
     btn.addEventListener('contextmenu', (e) => e.preventDefault());
 });
+
+// --- COLOR PICKER ENGINE ---
+let savedSelectionRange = null;
+let savedRawStart = null;
+let savedRawEnd = null;
+let pendingColorHex = null;
+let pendingColorCode = null;
+let previewTextStr = "Sample Text";
+
+function openColorPicker() {
+    if (currentMode === 'visual') {
+        const sel = window.getSelection();
+        if (sel.rangeCount > 0) {
+            savedSelectionRange = sel.getRangeAt(0);
+            const selectedText = savedSelectionRange.toString();
+            previewTextStr = selectedText.length > 0 ? selectedText : "Sample Text";
+        } else {
+            previewTextStr = "Sample Text";
+        }
+    } else {
+        savedRawStart = rawEditor.selectionStart;
+        savedRawEnd = rawEditor.selectionEnd;
+        const selectedText = rawEditor.value.substring(savedRawStart, savedRawEnd);
+        previewTextStr = selectedText.length > 0 ? selectedText : "Sample Text";
+    }
+
+    const currentWood = document.getElementById('woodType').value;
+    document.getElementById('colorPreviewSign').setAttribute('data-wood', currentWood);
+    
+    document.getElementById('colorPreviewSign').innerText = previewTextStr;
+    document.getElementById('colorPreviewSign').style.color = '#000000';
+    pendingColorHex = null;
+    pendingColorCode = null;
+
+    const container = document.getElementById('colorOptionsContainer');
+    container.innerHTML = ''; 
+
+    buildColorSection("Standard Colors", charDictionary["Standard Colors"], container);
+    buildColorSection("Material Colors", charDictionary["Material Colors"], container);
+
+    document.getElementById('colorPickerModal').classList.add('active');
+}
+
+function buildColorSection(title, colors, container) {
+    const header = document.createElement('div');
+    header.style.cssText = 'color: #333; font-size: 16px; margin: 10px 0 5px 0; text-shadow: 1px 1px 0px var(--mc-ui-border-light); border-bottom: 2px solid var(--mc-ui-border-dark); padding-bottom: 4px;';
+    header.innerText = title;
+    container.appendChild(header);
+
+    const grid = document.createElement('div');
+    grid.style.cssText = currentMode === 'visual' 
+        ? 'display: grid; grid-template-columns: repeat(auto-fill, minmax(44px, 1fr)); gap: 6px;' 
+        : 'display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px;';
+    
+    colors.forEach(c => {
+        const btn = document.createElement('div');
+        if (currentMode === 'visual') {
+            btn.className = 'color-btn-visual';
+            btn.style.cssText = `width: 44px; height: 44px; background-color: ${c.colorHex}; border: 3px solid var(--mc-ui-black); box-shadow: inset 2px 2px 0px rgba(255,255,255,0.4), inset -2px -2px 0px rgba(0,0,0,0.4); cursor: pointer;`;
+            btn.onclick = () => previewColor(btn, c.colorHex, c.char, true);
+        } else {
+            btn.className = 'color-btn-raw';
+            btn.style.cssText = `display: flex; align-items: center; gap: 10px; background-color: var(--mc-ui-bg); border: 2px solid var(--mc-ui-black); padding: 6px; cursor: pointer; box-shadow: inset 2px 2px 0px var(--mc-ui-border-light), inset -2px -2px 0px var(--mc-ui-border-dark);`;
+            
+            // NEW: Added the fixed-width code span and the c.label span!
+            btn.innerHTML = `
+                <div style="width: 24px; height: 24px; border: 2px solid var(--mc-ui-black); background-color: ${c.colorHex}; flex-shrink: 0;"></div>
+                <span style="font-family: 'MinecraftSeven', monospace; font-size: 18px; width: 24px; text-align: center;">${c.char}</span>
+                <span style="font-family: 'MinecraftSeven', sans-serif; font-size: 14px; color: #333; line-height: 1.1;">${c.label}</span>
+            `;
+            
+            btn.onclick = () => previewColor(btn, c.colorHex, c.char, false);
+        }
+
+        grid.appendChild(btn);
+    });
+    container.appendChild(grid);
+}
+
+function previewColor(btnElement, hex, code, isVisual) {
+    document.querySelectorAll('.color-btn-visual, .color-btn-raw').forEach(b => b.classList.remove('selected'));
+    btnElement.classList.add('selected');
+
+    pendingColorHex = hex;
+    pendingColorCode = code;
+
+    const preview = document.getElementById('colorPreviewSign');
+    if (currentMode === 'visual') {
+        preview.style.color = hex;
+    } else {
+        preview.innerText = code + previewTextStr;
+        preview.style.color = hex;
+    }
+}
+
+function applySelectedColor() {
+    if (!pendingColorHex && !pendingColorCode) {
+        closeColorPicker();
+        return;
+    }
+    
+    closeColorPicker();
+
+    if (currentMode === 'visual') {
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        if (savedSelectionRange) sel.addRange(savedSelectionRange);
+        
+        visualEditor.focus();
+        document.execCommand('foreColor', false, pendingColorHex);
+    } else {
+        const selectedText = rawEditor.value.substring(savedRawStart, savedRawEnd);
+        rawEditor.setSelectionRange(savedRawStart, savedRawEnd);
+        rawEditor.focus();
+        
+        if (selectedText.length > 0) {
+            // Multi-line safe wrap for raw mode
+            const newText = pendingColorCode + selectedText.replace(/\n/g, '\n' + pendingColorCode) + '§r';
+            insertData(newText, null, null); 
+        } else {
+            insertData(pendingColorCode, null, pendingColorCode);
+        }
+    }
+    saveSession();
+}
+
+function closeColorPicker() {
+    document.getElementById('colorPickerModal').classList.remove('active');
+}
+
+
+// --- DYNAMIC BUTTON ANIMATIONS ---
+const colorToolBtn = document.getElementById('colorToolBtn');
+const rainbowColors = ['#FF5555', '#FFAA00', '#FFFF55', '#55FF55', '#55FFFF', '#5555FF', '#FF55FF'];
+let rainbowIndex = 0;
+
+const glitchToolBtn = document.getElementById('glitchToolBtn');
+const glitchChars = ['#', '%', '&', '?', '@', '$', 'X', '█', '▒'];
+
+// Rainbow Color Cycler
+setInterval(() => {
+    if (colorToolBtn) {
+        colorToolBtn.style.color = rainbowColors[rainbowIndex];
+        colorToolBtn.style.textShadow = '1px 1px 0px #000';
+        rainbowIndex = (rainbowIndex + 1) % rainbowColors.length;
+    }
+}, 800);
+
+// True Minecraft Obfuscation (Glitch) Cycler
+setInterval(() => {
+    if (glitchToolBtn) {
+        glitchToolBtn.innerText = glitchChars[Math.floor(Math.random() * glitchChars.length)];
+    }
+}, 50); // Cycles every 50ms for that erratic energy
