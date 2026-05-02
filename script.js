@@ -19,19 +19,89 @@ const charDictionary = {
     ], 
     "Sign Tutorials": [
         {
-            char: `Use the section sign and .`,
-            label: "Formatting guide",
+            char: `:wood_pickaxe: : wood_pickaxe:
+:wood_sword: : wood_sword:
+:crafting_table: : crafting_table:
+:furnace: : furnace:`,
+            label: "Icons",
             fullWidth: true
         },
         {
+    char: `:armor: : armor:
+:shank: : shank:
+:heart: : heart:
+:minecoin: : minecoin:`,
+    label: "Icons",
+    fullWidth: true
+},
+        {
             char: `§00 §11 §22 §33 §44 §55 §66 §77 §88 §99 
 §aa §bb §cc §dd §ee §ff §gg §hh §ii §jj §mm §nn
-§pp §qq §ss §gt §uu §vv §ww §xx §yy §zz
-§kk §k GLITCH §ll §lBold §oo §oItalic`,
+§pp §qq §ss §tt §uu 
+k §kGLITCH l §lBold o §oItalic`,
             label: "Formatting Characters",
             fullWidth: true
         }
     ],
+        "Xbox Controls": [
+        { char: "\uE000", label: "A Button" }, { char: "\uE001", label: "B Button" },
+        { char: "\uE002", label: "X Button" }, { char: "\uE003", label: "Y Button" },
+        { char: "\uE004", label: "LB" }, { char: "\uE005", label: "RB" },
+        { char: "\uE006", label: "LT" }, { char: "\uE007", label: "RT" },
+        { char: "\uE008", label: "Select" }, { char: "\uE009", label: "Start" },
+        { char: "\uE00A", label: "L-Stick" }, { char: "\uE00B", label: "R-Stick" },
+        { char: "\uE00C", label: "D-Up" }, { char: "\uE00D", label: "D-Left" },
+        { char: "\uE00E", label: "D-Down" }, { char: "\uE00F", label: "D-Right" }
+    ],
+    "PlayStation Controls": [
+        { char: "\uE020", label: "Cross" }, { char: "\uE021", label: "Circle" },
+        { char: "\uE022", label: "Square" }, { char: "\uE023", label: "Triangle" },
+        { char: "\uE024", label: "L1" }, { char: "\uE025", label: "R1" },
+        { char: "\uE026", label: "L2" }, { char: "\uE027", label: "R2" },
+        { char: "\uE028", label: "Select" }, { char: "\uE029", label: "Start" },
+        { char: "\uE02A", label: "L-Stick" }, { char: "\uE02B", label: "R-Stick" },
+        { char: "\uE02C", label: "D-Up" }, { char: "\uE02D", label: "D-Left" },
+        { char: "\uE02E", label: "D-Down" }, { char: "\uE02F", label: "D-Right" }
+    ],
+    "Switch Controls": [
+        { char: "\uE040", label: "A Button" }, { char: "\uE041", label: "B Button" },
+        { char: "\uE042", label: "X Button" }, { char: "\uE043", label: "Y Button" },
+        { char: "\uE044", label: "L Bumper" }, { char: "\uE045", label: "R Bumper" },
+        { char: "\uE046", label: "ZL" }, { char: "\uE047", label: "ZR" },
+        { char: "\uE048", label: "Minus" }, { char: "\uE049", label: "Plus" },
+        { char: "\uE04C", label: "D-Up" }, { char: "\uE04D", label: "D-Left" },
+        { char: "\uE04E", label: "D-Down" }, { char: "\uE04F", label: "D-Right" }
+    ],
+    "PC & Mobile Controls": [
+        { char: "\uE060", label: "Left Click" }, { char: "\uE061", label: "Right Click" },
+        { char: "\uE062", label: "Mid Click" }, { char: "\uE063", label: "Mouse" },
+        { char: "\uE014", label: "Jump" }, { char: "\uE015", label: "Attack" },
+        { char: "\uE016", label: "Joystick" }, { char: "\uE017", label: "Crosshair" },
+        { char: "\uE018", label: "Interact" }, { char: "\uE019", label: "Crouch" },
+        { char: "\uE01A", label: "Sprint" }, { char: "\uE01B", label: "Fly Up" },
+        { char: "\uE01C", label: "Fly Down" }, { char: "\uE01D", label: "Dismount" }
+    ],
+    "HUD & UI": [
+        { char: "\uE100", label: "Food/Shank" }, { char: "\uE101", label: "Armor" },
+        { char: "\uE102", label: "Minecoin" }, { char: "\uE105", label: "Token" },
+        { char: "\uE10C", label: "Heart" }, { char: "\uE017", label: "Crosshair" }
+    ],
+    "Blocks & Items": [
+        { char: "\uE108", label: "Wood Pickaxe" }, { char: "\uE109", label: "Wood Sword" },
+        { char: "\uE10A", label: "Crafting Table" }, { char: "\uE10B", label: "Furnace" }
+    ],
+    "Touch Controls": [
+        { char: "\uE080", label: "Forward" }, { char: "\uE081", label: "Left" },
+        { char: "\uE082", label: "Back" }, { char: "\uE083", label: "Right" },
+        { char: "\uE084", label: "Jump" }, { char: "\uE085", label: "Sneak" },
+        { char: "\uE086", label: "Fly Up" }, { char: "\uE087", label: "Fly Down" },
+        { char: "\uE088", label: "Stop Flying" }, { char: "\uE089", label: "Emote" },
+        { char: "\uE08A", label: "Chat" }, { char: "\uE08B", label: "Pause" }
+    ],
+    "Crafting Toggle": [
+        { char: "\uE0A0", label: "Toggle On" }, { char: "\uE0A1", label: "Toggle Off" }
+    ],
+
     "Lever & Switch States": [
     {
         char: "§8[ §a███ §8]\n§0§l{System}\n§8[ §c▒▒▒ §8]",
@@ -1035,7 +1105,26 @@ function loadSession() {
     
     restoreState(savedData);
     pushHistory(savedData); // Seed the initial state for the undo stack
+
+    // --- SEED INTERNAL CARET FOR D-PAD ---
+    // Mathematically plants the invisible marker at the end of the text on load.
+    // The visual caret will native-flash the moment the user taps the D-Pad or the text!
+    setTimeout(() => {
+        if (currentMode === 'visual') {
+            if (typeof window.getSelection !== "undefined" && typeof document.createRange !== "undefined") {
+                const range = document.createRange();
+                range.selectNodeContents(visualEditor);
+                range.collapse(false); // Collapses to the very end
+                const sel = window.getSelection();
+                sel.removeAllRanges();
+                sel.addRange(range);
+            }
+        } else {
+            rawEditor.setSelectionRange(rawEditor.value.length, rawEditor.value.length);
+        }
+    }, 50);
 }
+
 
 function clearSign() {
     visualEditor.innerHTML = '';
