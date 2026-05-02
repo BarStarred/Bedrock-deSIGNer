@@ -16,7 +16,7 @@ const charDictionary = {
         { char: "§p", label: "Gold", colorHex: "#DEB12D" }, { char: "§q", label: "Emerald", colorHex: "#47A036" },
         { char: "§s", label: "Diamond", colorHex: "#2CBAA8" }, { char: "§t", label: "Lapis", colorHex: "#21497B" },
         { char: "§u", label: "Amethyst", colorHex: "#9A5CC6" }
-    ],
+    ], 
     "Sign Tutorials": [
         {
             char: `Use the section sign and .`,
